@@ -22,11 +22,19 @@ FIRSTSAMPLE=$BAM_SAMPLE_BATCH_PREFIX'00'
 
 split -d -l $NLINES $PROJECT_DIR'/'$BAM_SAMPLE_LIST $PROJECT_DIR'/'$BAM_SAMPLE_BATCH_PREFIX
 
+#Set mrfast_template.txt
+#SED_STRING=$DEFAULT_EXOME_PATH'/* '$TEMP_EXOME_DIR
+#echo $SED_STRING
+#sed -i 's|DEFAULT_EXOME_DIR TEMP_EXOME_DIR|'"$SED_STRING"'|' $SCRIPT_DIR'/mrfast_template.txt'
+cp $SCRIPT_DIR'/mrfast_template_original.txt' $SCRIPT_DIR'/mrfast_template.txt'
+echo 'mkdir -p '$TEMP_EXOME_DIR >> $SCRIPT_DIR'/mrfast_template.txt'
+echo 'rsync '$DEFAULT_EXOME_PATH'/* '$TEMP_EXOME_DIR >> $SCRIPT_DIR'/mrfast_template.txt'
+
+
 for f in $PROJECT_DIR/$BAM_SAMPLE_BATCH_PREFIX*
 do 
 	bname=`basename $f`
 	bname_no_ext=`basename $f .sh`
-	echo $f $bname
 	if [[ "$bname_no_ext" == "$bname" ]]
 	then
 		if [[ "$bname" == "$FIRSTSAMPLE" ]]
@@ -35,9 +43,11 @@ do
 		else
 			sed -i '1i\sampleID\tbam_path' $f
 		fi
-		python $FRFAST_COMMAND_GEN $PROJECT_DIR/$f $PROJECT_DIR/hdf5 $PROJECT_DIR/logs \
-		$DEFAULT_EXOME_PATH $DEFAULT_EXOME_TRANS_PATH \
-		--dont-rsync-index --disable-gui --single-host --disable-port-scan > $f.sh
+
+		python $FRFAST_COMMAND_GEN $f $PROJECT_DIR'/hdf5' $PROJECT_DIR'/logs' \
+		$TEMP_EXOME_DIR'/default_exome.fa' $DEFAULT_EXOME_TRANS_PATH \
+		--dont-rsync-index --disable-gui --single-host --disable-port-scan \
+		--template-header-file=$SCRIPT_DIR'/mrfast_template.txt' > $f.sh
 		chmod 755 $f.sh
 	fi
 done

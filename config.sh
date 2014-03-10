@@ -21,11 +21,11 @@ module load scipy/0.10.0
 module load pytables/2.3.1_hdf5-1.8.8
 module load MySQLdb/1.2.3
 
-FRFAST_COMMAND_GEN=/net/eichler/vol2/local/inhousebin/frFAST/command_gen.py
-FRFAST_BATCHES=3
+FRFAST_BATCHES=5
 BAM_SAMPLE_LIST='samples_03-04-14.txt'
 BAM_SAMPLE_BATCH_PREFIX='sample_'
 SCRIPT_DIR=/net/eichler/vol5/home/bnelsj/conifer_pipeline/scripts
+FRFAST_COMMAND_GEN=/net/eichler/vol5/home/bnelsj/conifer_pipeline/frFAST/command_gen.py
 
 PROJECT_DIR=/net/eichler/vol17/dutch_asperger/nobackups/conifer_test
 PROJECT_NAME=dutch_asp
@@ -38,6 +38,6 @@ SVD_DISCARD=9
 SVD_SAMPLE_LIST=$PROJECT_DIR/svd_sample_list.txt
 
 mkdir -p $PROJECT_DIR/hdf5
-mkdir -p $PROJECT_DIR/log
+mkdir -p $PROJECT_DIR/logs
 mkdir -p $PROJECT_DIR/calls
 mkdir -p $PROJECT_DIR/plots
