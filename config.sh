@@ -20,6 +20,7 @@ module load numpy/1.6.1
 module load scipy/0.10.0
 module load pytables/2.3.1_hdf5-1.8.8
 module load MySQLdb/1.2.3
+module load R/2.15.1
 
 FRFAST_BATCHES=5
 BAM_SAMPLE_LIST='samples_03-04-14.txt'
@@ -30,6 +31,7 @@ FRFAST_COMMAND_GEN=/net/eichler/vol5/home/bnelsj/conifer_pipeline/frFAST/command
 PROJECT_DIR=/net/eichler/vol17/dutch_asperger/nobackups/conifer_test
 PROJECT_NAME=dutch_asp
 CONIFER_SCRIPT_DIR=/net/eichler/vol8/home/nkrumm/CoNIFER/scripts
+CONIFER_TOOLS_DIR=/net/eichler/vol5/home/bnelsj/conifer_pipeline/conifer-tools/scripts
 DEFAULT_EXOME_PATH=/net/grc/shared/scratch/nkrumm/INDEX/default_exome
 TEMP_EXOME_DIR=/var/tmp/`whoami`
 DEFAULT_EXOME_TRANS_PATH=/net/grc/shared/scratch/nkrumm/translate_tables/default_exome.translate.txt
@@ -41,3 +43,4 @@ mkdir -p $PROJECT_DIR/hdf5
 mkdir -p $PROJECT_DIR/logs
 mkdir -p $PROJECT_DIR/calls
 mkdir -p $PROJECT_DIR/plots
+mkdir -p $PROJECT_DIR/rpkm
