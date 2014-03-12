@@ -1,5 +1,4 @@
 #!/bin/bash
-#Arguments: samplefile batches
 
 source config.sh
 

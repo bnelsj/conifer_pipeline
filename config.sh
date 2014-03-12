@@ -37,6 +37,7 @@ TEMP_EXOME_DIR=/var/tmp/`whoami`
 DEFAULT_EXOME_TRANS_PATH=/net/grc/shared/scratch/nkrumm/translate_tables/default_exome.translate.txt
 DEFAULT_PROBEFILE=/net/eichler/vol8/home/nkrumm/CoNIFER/probe_files/probes.nimblegen.noheader.cut.txt
 SVD_DISCARD=9
+FAMILY_CALL_BATCHES=10
 SVD_SAMPLE_LIST=$PROJECT_DIR/svd_sample_list.txt
 
 mkdir -p $PROJECT_DIR/hdf5
