@@ -12,15 +12,18 @@ module load mpc/0.8.2
 module load mpfr/3.1.0
 module load gmp/5.0.2
 module load gcc/4.7.0
-module load python/2.7.2
+#module load python/2.7.2
+module load python/2.7.3
+module load numpy/1.7.0
 module load hdf5/1.8.8
 module load zlib/1.2.5
 module load lzo/2.06
-module load numpy/1.6.1
+#module load numpy/1.6.1
 module load scipy/0.10.0
 module load pytables/2.3.1_hdf5-1.8.8
 module load MySQLdb/1.2.3
 module load R/2.15.1
+module load parallel/latest
 
 FRFAST_BATCHES=5
 BAM_SAMPLE_LIST='samples_03-04-14.txt'
