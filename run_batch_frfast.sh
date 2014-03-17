@@ -5,6 +5,9 @@ source config.sh
 MEM_REQUEST=4G
 PROC_REQUEST=10
 
+#FRFAST_BATCHES=$1
+
+
 NSAMPLES=`wc -l $PROJECT_DIR'/'$BAM_SAMPLE_LIST | awk {'print $1'}`
 
 if [ $FRFAST_BATCHES -gt $NSAMPLES  ]

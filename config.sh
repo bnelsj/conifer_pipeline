@@ -43,8 +43,4 @@ SVD_DISCARD=9
 FAMILY_CALL_BATCHES=10
 SVD_SAMPLE_LIST=$PROJECT_DIR/svd_sample_list.txt
 
-mkdir -p $PROJECT_DIR/hdf5
-mkdir -p $PROJECT_DIR/logs
-mkdir -p $PROJECT_DIR/calls
-mkdir -p $PROJECT_DIR/plots
-mkdir -p $PROJECT_DIR/rpkm
+pushd $PROJECT_DIR; mkdir -p hdf5 logs calls plots rpkm; popd
