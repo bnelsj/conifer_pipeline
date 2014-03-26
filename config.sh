@@ -13,8 +13,6 @@ module load mpfr/3.1.0
 module load gmp/5.0.2
 module load gcc/4.7.0
 module load python/2.7.2
-#module load python/2.7.3
-#module load numpy/1.7.0
 module load hdf5/1.8.8
 module load zlib/1.2.5
 module load lzo/2.06
@@ -40,7 +38,6 @@ export TEMP_EXOME_DIR=/var/tmp/`whoami`
 export DEFAULT_EXOME_TRANS_PATH=/net/grc/shared/scratch/nkrumm/translate_tables/default_exome.translate.txt
 export DEFAULT_PROBEFILE=/net/eichler/vol8/home/nkrumm/CoNIFER/probe_files/probes.nimblegen.noheader.cut.txt
 export SVD_DISCARD=9
-export FAMILY_CALL_BATCHES=1
+export FAMILY_CALL_BATCH_SIZE=10
 export SVD_SAMPLE_LIST=$PROJECT_DIR/svd_sample_list.txt
-
-pushd $PROJECT_DIR > /dev/null; mkdir -p hdf5 logs calls plots rpkm; popd > /dev/null
+export CONIFER_FILE=$PROJECT_DIR/SVD_$SVD_DISCARD/all_chr_$PROJECT_NAME'_SVD'$SVD_DISCARD.hdf5

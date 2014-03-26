@@ -20,7 +20,7 @@ $(merge_filter_cluster_file) : $(merge_filter_file)
 	python $(CONIFER_TOOLS_DIR)/03_cluster_calls.py \
 	--infile $(merge_filter_file) --outfile $(merge_filter_cluster_file)
 
-plot_cnvrs_trio : $(mfgc_esp) $(conifer_file)
+make_trio_plots : $(mfgc_esp) $(conifer_file)
 	python QC02_plot_cnvrs_trio.py --conifer_file $(conifer_file) --call_file $(mfgc_esp) \
 	--out_dir $(PROJECT_DIR)/plots/trios --cohort $(PROJECT_NAME)
 
@@ -48,8 +48,11 @@ $(merge_file) : $(conifer_file) $(batch_call_file)
 	python 01b_merge_calls.py --conifer_file $(conifer_file) \
 	--call_file $(batch_call_file) --outfile $(merge_file)
 
-$(batch_call_file) : $(conifer_file)
+$(batch_call_file) : $(conifer_file) setup_dirs
 	./conifer_create_family_calls.sh
+
+setup_dirs :
+	pushd $(PROJECT_DIR); mkdir -p hdf5 logs calls plots rpkm; popd
 
 .PHONY : clean
 
