@@ -1,6 +1,6 @@
 #Modify then source config.sh before running make
 
-conifer_file = /net/eichler/vol8/home/nkrumm/EXOMES/ESP2000/SVD/ESP.BROAD.SVD70.QC.SampleQC.hdf5
+conifer_file = $(CONIFER_FILE)
 batch_call_file = $(PROJECT_DIR)/calls/$(PROJECT_NAME)_all_calls_batches_SVD$(SVD_DISCARD).csv
 merge_file = $(PROJECT_DIR)/calls/$(PROJECT_NAME)_merged_calls_SVD$(SVD_DISCARD).csv
 merge_filter_file = $(PROJECT_DIR)/calls/$(PROJECT_NAME)_merged_filtered_calls_SVD$(SVD_DISCARD).csv
@@ -19,8 +19,6 @@ make_plots : $(merge_filter_cluster_file)
 $(merge_filter_cluster_file) : $(merge_filter_file)
 	python $(CONIFER_TOOLS_DIR)/03_cluster_calls.py \
 	--infile $(merge_filter_file) --outfile $(merge_filter_cluster_file)
-
-all : plot_cnvrs_trio
 
 plot_cnvrs_trio : $(mfgc_esp) $(conifer_file)
 	python QC02_plot_cnvrs_trio.py --conifer_file $(conifer_file) --call_file $(mfgc_esp) \

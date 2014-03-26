@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     calls = calls.filter(lambda x: (x["cnvr_frequency_%s" % args.cohort] >= args.min_freq) & (x["cnvr_frequency_%s" % args.cohort] < args.max_freq))
 
-    calls.calls["familyID"] = map(lambda x: x.split(".")[0], calls.calls.sampleID.values)
+    calls.calls["familyID"] = map(lambda x: x.split(".")[:-1], calls.calls["sampleID"])
     offspring_calls = calls.filter(lambda x: x["sampleID"].endswith(("p1","s1","s2","s3")))
     parent_calls =  calls.filter(lambda x: x["sampleID"].endswith(("mo","fa")))
     sibling_calls = calls.filter(lambda x: x["sampleID"].endswith(("s1", "s2", "s3")))
@@ -73,7 +73,7 @@ if __name__ == "__main__":
         print call
         cnvrID = call["cnvrID_%s" % args.cohort]
         fID = call["familyID"]
-        rel = call["sampleID"].split(".")[1]
+        rel = call["sampleID"].split(".")[-1]
         #if cnvrID in parent_calls.calls[parent_calls.calls.familyID==fID]["cnvrID_SSC"].values:
         #if call.inh in INHERITED_CODES:
             # inherited event

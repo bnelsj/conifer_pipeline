@@ -15,4 +15,6 @@ done
 MEM_REQUEST='6G'
 PROC_REQUEST=6
 
-parallel 'qsub -l mfree='$MEM_REQUEST' -N s{} -v CHR={} -pe serial '$PROC_REQUEST' conifer_make_files.sh' ::: `seq 1 24`
+echo Submitting CoNIFER files...
+
+parallel 'qsub -sync y -l mfree='$MEM_REQUEST' -N s{} -v CHR={} -pe serial '$PROC_REQUEST' conifer_make_files.sh' ::: `seq 1 24`

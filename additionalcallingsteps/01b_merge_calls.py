@@ -33,7 +33,7 @@ def merge_calls(a, b):
 def merge_calls_across_SD(calls, pipeline, max_distance_to_merge=50, min_sd_percent=0.5):
     out_calls = [] #pd.DataFrame(columns=list(calls.calls.columns) + ["merge_count"])
     chrom_probes = {chrom: pd.DataFrame(p.r.h5file.root.probes._f_getChild("probes_chr%d" % chrom).read()) for chrom in range(1,24)}
-    for sampleID in set(calls.calls.sampleID):
+    for sampleID in set(calls.calls["sampleID"]):
         print sampleID
         sample_calls = CallTable(calls.calls[calls.calls["sampleID"] == sampleID])
         for chrom in set(sample_calls.calls.chromosome):

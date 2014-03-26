@@ -31,7 +31,8 @@ def genotype_family(call, p, sample_size, flank_probes=20):
 
     out_r = []
     d_1 = data["index"].rpkm[data_mask]
-    for s in np.random.choice(p.samples, size=sample_size, replace=False):
+    np.random.shuffle(p.samples)
+    for s in p.samples:
         if s == sampleID:
             continue
         d_2 = p.r.getExonValuesByExons(chromosome, flank_start, flank_stop, sampleList=[s]).rpkm.T
@@ -65,7 +66,7 @@ if __name__ == "__main__":
     p = ConiferPipeline(args.conifer_file)
 
     calls = CallTable(args.call_file)
-    calls.calls["familyID"] = map(lambda x: x[0:5], calls.calls.sampleID)
+    calls.calls["familyID"] = map(lambda x: x.split('.')[0], calls.calls["sampleID"])
     new_calls = CallTable()
     offspring_calls = calls.filter(lambda x: x["sampleID"].endswith(("p", "s", "p1"))).calls
     #offspring_calls = calls.filter(lambda x: x["sampleID"][6] in ["p","s"]).calls
@@ -111,7 +112,7 @@ if __name__ == "__main__":
                 if (from_mo >= args.threshold) and (from_fa < args.threshold):
                     # add call for the mother
                     new_call = c.copy()
-                    new_call["sampleID"] = c["sampleID"].split(".")[0] + ".mo"
+                    new_call["sampleID"] = c["sampleID"].split(".")[:-1] + ".mo"
                     new_call["median_svdzrpkm"] = res["mo"][1]
                     new_call.set_value("genotyped_p", from_mo)
                     print "New call --> Mother (r=%f)" % from_mo
@@ -120,7 +121,7 @@ if __name__ == "__main__":
                 elif (from_fa >= args.threshold) and (from_mo < args.threshold):
                     # add calll for the father
                     new_call = c.copy()
-                    new_call["sampleID"] = c["sampleID"][0:5] + ".fa"
+                    new_call["sampleID"] = c["sampleID"].split('.')[:-1] + ".fa"
                     new_call["median_svdzrpkm"] = res["fa"][1]
                     new_call.set_value("genotyped_p", from_fa)
                     print "New call --> Father (r=%f)" % from_fa
