@@ -11,7 +11,7 @@ esp_in = ESP.all_chr.qc.filtered.clustered.csv
 esp_out = ESP.all_chr.qc.filtered.clustered.translated.csv
 mfgc_esp = $(PROJECT_DIR)/calls/$(PROJECT_NAME)_fcalls_merged_filtered_genotyped_clustered_esp.csv
 
-make_plots : $(merge_filter_cluster_file)
+plots : $(merge_filter_cluster_file)
 	python $(CONIFER_TOOLS_DIR)/plotting/QC02_plot_cnvrs.py \
 	--conifer_file $(conifer_file) --call_file $(merge_filter_cluster_file) \
 	--out_dir $(PROJECT_DIR)/plots
@@ -20,7 +20,7 @@ $(merge_filter_cluster_file) : $(merge_filter_file)
 	python $(CONIFER_TOOLS_DIR)/03_cluster_calls.py \
 	--infile $(merge_filter_file) --outfile $(merge_filter_cluster_file)
 
-make_trio_plots : $(mfgc_esp) $(conifer_file)
+trio_plots : $(mfgc_esp) $(conifer_file)
 	python QC02_plot_cnvrs_trio.py --conifer_file $(conifer_file) --call_file $(mfgc_esp) \
 	--out_dir $(PROJECT_DIR)/plots/trios --cohort $(PROJECT_NAME)
 

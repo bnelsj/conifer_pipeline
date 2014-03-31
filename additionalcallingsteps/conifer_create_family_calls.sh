@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source config.sh
+source ../config.sh
 
 samples=`ptdump -c $CONIFER_FILE:/chr1/ | tr -d \' | awk {'print $3'} | tail -n +2`
 nsamples=`echo -e "$samples" | wc -l`
